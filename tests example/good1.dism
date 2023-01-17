@@ -1,0 +1,36 @@
+       mov 7 65535  ; initialize FP
+       mov 6 65535  ; initialize SP
+       mov 5 1  ; initialize HP
+       mov 0 0  ; ALLOCATE STACK SPACE FOR MAIN LOCALS
+       mov 1 1 
+       sub 6 6 1  ; SP--
+       bgt 6 5 #0 ; branch if SP>HP
+       mov 1 77 ; error code 77 => out of stack memory
+       hlt 1  ; out of stack memory! (SP <= HP) 
+#0: mov 0 0
+       mov 0 0  ; BEGIN METHOD/MAIN-BLOCK BODY
+       mov 1 1 
+       str 6 0 1  ; M[SP] <- R[r1] (a nat literal)
+       mov 1 1 
+       sub 6 6 1  ; SP--
+       bgt 6 5 #1 ; branch if SP>HP
+       mov 1 77 ; error code 77 => out of stack memory
+       hlt 1  ; out of stack memory! (SP <= HP) 
+#1: mov 0 0
+       mov 1 65535  ; lhs address pass to
+       lod 2 6 1  ; R[r2] <- M[SP + 1] (lod nat val)
+       str 1 0 2  ; M[lhs addr + 0] <- R[r3] (sotre value to lhs addr)
+       mov 1 1 
+       add 6 6 1  ; SP++
+       mov 1 65535  ; ID_EXPR: this is calculated NAT addr
+       lod 2 1 0  ; R[r2] <- M[SP + 1] (lod nat val from above addr into r2)
+       str 6 0 2  ; M[SP] <- R[r1] (str this nat val to SP)
+       mov 1 1 
+       sub 6 6 1  ; SP--
+       bgt 6 5 #2 ; branch if SP>HP
+       mov 1 77 ; error code 77 => out of stack memory
+       hlt 1  ; out of stack memory! (SP <= HP) 
+#2: mov 0 0
+       lod 1 6 1  ; R[r1] <- M[SP + 1] (lod res.(nat) to r1)
+       ptn 1  ; Print natural number R[s] to screen
+       hlt 0  ; NORMAL TERMINATION AT END OF MAIN BLOCK

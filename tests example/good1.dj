@@ -1,0 +1,1 @@
+main { nat n; n=1; printNat(n); }
