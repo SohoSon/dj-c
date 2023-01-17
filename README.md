@@ -3,10 +3,10 @@
 Compilation of the Compiler 
 Use the following commands to compile the complete djc from scratch: 
 ''''
-> flex dj.l 
-> bison -v dj.y 
-> sed -i '/extern YYSTYPE yylval/d' dj.tab.c 
-> gcc dj.tab.c ast.c symtbl.c typecheck.c codegen.c -o djc
+flex dj.l 
+bison -v dj.y 
+sed -i '/extern YYSTYPE yylval/d' dj.tab.c 
+gcc dj.tab.c ast.c symtbl.c typecheck.c codegen.c -o djc
 ''''
 
 Example Executions 
